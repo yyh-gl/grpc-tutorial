@@ -81,6 +81,18 @@ Service：REST APIにおけるエンドポイントに似たもの
 
    `$ protoc -I helloworld/ helloworld/helloworld.proto --go_out=plugins=grpc:helloworld`
    
+   各オプションの意味は下記のとおりであるため、
+
+   ```
+   ・Iオプションで.protoファイルのimportで参照するルートディレクトリを指定する
+   ・go_out=オプションで出力先を変更する
+   ```
+   [参照](https://qiita.com/lufia/items/bcdb5081ddc10af50d8a#protoc-gen-go%E3%81%AE%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3)
+
+   `$ protoc --go_out=plugins=grpc:. helloworld/helloworld.proto`
+
+   でも同じ結果を得ることができる
+
 1. 参照する `.pb.go` ファイルを変更
 
    ```greeter_server/main.go
