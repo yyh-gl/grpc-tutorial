@@ -43,7 +43,9 @@
    2019/04/09 21:40:36 Greeting: Hello world
    ```
 
-## サンプルプログラムの動き解説
+## 新しい Service を追加
+
+Service：REST APIにおけるエンドポイントに似たもの
 
 1. Serviceに定義追加
 
@@ -60,4 +62,50 @@
    
 1. gRPCのコードを生成
 
-   ``
+   下記コマンドを実行することで `helloworld.pb.go` が生成される
+
+   `$ protoc -I helloworld/ helloworld/helloworld.proto --go_out=plugins=grpc:helloworld`
+   
+1. 参照する `.pb.go` ファイルを変更
+
+   ```greeter_server/main.go
+   import (
+   	"context"
+   	"log"
+   	"net"
+   
+   	"google.golang.org/grpc"
+   	pb "../helloworld"
+   )
+   ```
+   
+   ```greeter_client/main.go
+   import (
+   	"context"
+   	"log"
+   	"os"
+   	"time"
+   
+   	"google.golang.org/grpc"
+   	pb "../helloworld"
+   )
+   ```
+
+1. `SayHelloAgain()`の処理実装
+
+   ```greeter_server/main.go
+   // SayHelloAgain implements helloworld.GreeterServer
+   func (s *server) SayHelloAgain(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
+        return &pb.HelloReply{Message: "Hello again " + in.Name}, nil
+   }
+   ```
+   
+1. Clientからのリクエスト追加
+
+   ```greeter_client/main.go
+   r, err = c.SayHelloAgain(ctx, &pb.HelloRequest{Name: name})
+   	if err != nil {
+   		log.Fatalf("could not greet again: %v", err)
+   	}
+   	log.Printf("Again Greeting: %s", r.Message)
+   ```
