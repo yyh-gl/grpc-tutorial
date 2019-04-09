@@ -38,9 +38,45 @@
     └── helloworld.proto
 ```
 
-1. サンプルディレクトリに移動
+1. サンプルをワークディレクトリにコピー
 
-   `$ cd $GOPATH/src/google.golang.org/grpc/examples/helloworld`
+   `$GOPATH/src/google.golang.org/grpc/examples/helloworld`
+   
+   の内容を自分のワークディレクトリにコピーしてきて作業するために
+   
+   下記コマンドでサンプルを持ってくる
+   
+   `$ cp -r $GOPATH/src/google.golang.org/grpc/examples/helloworld $GOPATH/src/grpc-tutorial`
+
+1. 参照する `.pb.go` ファイルを変更
+
+   サンプルの `helloworld.pb.gp` を見に行くようになっているのを
+   
+   ワークディレクトリ内の `helloworld.pb.gp` を見に行くように修正
+   
+   ```go:greeter_server/main.go
+   import (
+      "context"
+      "log"
+      "net"
+
+      "google.golang.org/grpc"
+      pb "../helloworld"
+   )
+   ```
+
+   ```go:greeter_client/main.go
+   import (
+      "context"
+      "log"
+      "os"
+      "time"
+      
+      "google.golang.org/grpc"
+      pb "../helloworld"
+   )
+   ```
+   
 
 1. Server起動
 
@@ -66,7 +102,7 @@ Service：REST APIにおけるエンドポイントに似たもの
 
    下記のとおり、 Greeter Service に `SayHelloAgain()` を定義
    
-   ```proto
+   ```proto:helloworld.proto
    service Greeter {
      // Sends a greeting
      rpc SayHello (HelloRequest) returns (HelloReply) {}
@@ -93,34 +129,9 @@ Service：REST APIにおけるエンドポイントに似たもの
 
    でも同じ結果を得ることができる
 
-1. 参照する `.pb.go` ファイルを変更
-
-   ```greeter_server/main.go
-   import (
-   	"context"
-   	"log"
-   	"net"
-   
-   	"google.golang.org/grpc"
-   	pb "../helloworld"
-   )
-   ```
-   
-   ```greeter_client/main.go
-   import (
-   	"context"
-   	"log"
-   	"os"
-   	"time"
-   
-   	"google.golang.org/grpc"
-   	pb "../helloworld"
-   )
-   ```
-
 1. `SayHelloAgain()`の処理実装
 
-   ```greeter_server/main.go
+   ```go:greeter_server/main.go
    // SayHelloAgain implements helloworld.GreeterServer
    func (s *server) SayHelloAgain(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
         return &pb.HelloReply{Message: "Hello again " + in.Name}, nil
@@ -129,7 +140,7 @@ Service：REST APIにおけるエンドポイントに似たもの
    
 1. Clientからのリクエスト追加
 
-   ```greeter_client/main.go
+   ```go:greeter_client/main.go
    r, err = c.SayHelloAgain(ctx, &pb.HelloRequest{Name: name})
    	if err != nil {
    		log.Fatalf("could not greet again: %v", err)
