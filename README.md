@@ -131,7 +131,7 @@ Service：REST APIにおけるエンドポイントに似たもの
    ```
    [参照](https://qiita.com/lufia/items/bcdb5081ddc10af50d8a#protoc-gen-go%E3%81%AE%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3)
 
-   `$ protoc --go_out=plugins=grpc:. helloworld/helloworld.proto`
+   `$ protoc helloworld/helloworld.proto --go_out=plugins=grpc:.`
 
    でも同じ結果を得ることができる
 
