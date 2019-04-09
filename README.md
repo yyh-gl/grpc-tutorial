@@ -17,7 +17,9 @@
 `$ go get -u github.com/golang/protobuf/protoc-gen-go`
 
 - Mac に protoc をインストール
-このprotocコマンドを叩くことで↑で入れた protoc-gen-go を使用してコンパイルを行う
+
+このprotocコマンドを叩くことで、先程入れた protoc-gen-go を使ってコンパイルを行う
+
 `$ brew install protobuf && brew upgrade  protobuf`
 
 
@@ -29,13 +31,13 @@
 
 1. Server起動
 
-   `go run greeter_server/main.go`
+   `$ go run greeter_server/main.go`
     
 1. Client起動
 
    Serverを起動したターミナルとは別のターミナルを使用する
 
-   `go run greeter_client/main.go`
+   `$ go run greeter_client/main.go`
 
    実行時に下記のとおり表示されればOK
     
@@ -108,4 +110,16 @@ Service：REST APIにおけるエンドポイントに似たもの
    		log.Fatalf("could not greet again: %v", err)
    	}
    	log.Printf("Again Greeting: %s", r.Message)
+   ```
+1. 実行
+
+   `$ go run greeter_server/main.go`
+
+   `$ go run greeter_client/main.go`
+   
+   実行して下記の通り表示されればOK
+   
+   ```
+   2019/04/09 22:25:30 Greeting: Hello world
+   2019/04/09 22:25:30 Again Greeting: Hello again world
    ```
