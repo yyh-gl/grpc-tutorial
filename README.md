@@ -55,6 +55,8 @@
    ワークディレクトリ内の `helloworld.pb.gp` を見に行くように修正
    
    ```go:greeter_server/main.go
+   // greeter_server/main.go
+   
    import (
       "context"
       "log"
@@ -66,6 +68,8 @@
    ```
 
    ```go:greeter_client/main.go
+   // greeter_client/main.go
+   
    import (
       "context"
       "log"
@@ -103,6 +107,8 @@ Service：REST APIにおけるエンドポイントに似たもの
    下記のとおり、 Greeter Service に `SayHelloAgain()` を定義
    
    ```proto:helloworld.proto
+   // helloworld/helloworld.proto
+   
    service Greeter {
      // Sends a greeting
      rpc SayHello (HelloRequest) returns (HelloReply) {}
@@ -132,6 +138,8 @@ Service：REST APIにおけるエンドポイントに似たもの
 1. `SayHelloAgain()`の処理実装
 
    ```go:greeter_server/main.go
+   // greeter_server/main.go
+   
    // SayHelloAgain implements helloworld.GreeterServer
    func (s *server) SayHelloAgain(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
         return &pb.HelloReply{Message: "Hello again " + in.Name}, nil
@@ -141,6 +149,8 @@ Service：REST APIにおけるエンドポイントに似たもの
 1. Clientからのリクエスト追加
 
    ```go:greeter_client/main.go
+   // greeter_client/main.go
+   
    r, err = c.SayHelloAgain(ctx, &pb.HelloRequest{Name: name})
    	if err != nil {
    		log.Fatalf("could not greet again: %v", err)
