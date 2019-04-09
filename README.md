@@ -25,6 +25,19 @@
 
 ## サンプルプログラムを動かす
 
+ディレクトリ構成は下記のとおり
+
+```
+├── README.md
+├── greeter_client
+│   └── main.go
+├── greeter_server
+│   └── main.go
+└── helloworld
+    ├── helloworld.pb.go
+    └── helloworld.proto
+```
+
 1. サンプルディレクトリに移動
 
    `$ cd $GOPATH/src/google.golang.org/grpc/examples/helloworld`
