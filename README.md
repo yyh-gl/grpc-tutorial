@@ -28,7 +28,7 @@
 ディレクトリ構成は下記のとおり
 
 ```
-grpc-tutorial
+$GOPATH/src/grpc-tutorial
 ├── README.md
 ├── greeter_client
 │   └── main.go
