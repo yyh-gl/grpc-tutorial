@@ -28,6 +28,7 @@
 ディレクトリ構成は下記のとおり
 
 ```
+grpc-tutorial
 ├── README.md
 ├── greeter_client
 │   └── main.go
