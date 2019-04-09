@@ -142,7 +142,7 @@ Service：REST APIにおけるエンドポイントに似たもの
    
    // SayHelloAgain implements helloworld.GreeterServer
    func (s *server) SayHelloAgain(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
-        return &pb.HelloReply{Message: "Hello again " + in.Name}, nil
+       return &pb.HelloReply{Message: "Hello again " + in.Name}, nil
    }
    ```
    
@@ -152,10 +152,10 @@ Service：REST APIにおけるエンドポイントに似たもの
    // greeter_client/main.go
    
    r, err = c.SayHelloAgain(ctx, &pb.HelloRequest{Name: name})
-   	if err != nil {
-   		log.Fatalf("could not greet again: %v", err)
-   	}
-   	log.Printf("Again Greeting: %s", r.Message)
+   if err != nil {
+       log.Fatalf("could not greet again: %v", err)
+   }
+   log.Printf("Again Greeting: %s", r.Message)
    ```
 1. 実行
 
